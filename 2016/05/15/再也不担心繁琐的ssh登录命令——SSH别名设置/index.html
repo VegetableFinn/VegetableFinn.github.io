@@ -195,7 +195,7 @@
 <p>好像效果很不错哦。只要输入dev就可以自动登录了。至于别名的用法以及是放在.bashrc还是.zshrc，自行出门百度下。</p>
 <hr>
 <h3 id="更优雅的处理方案"><a href="#更优雅的处理方案" class="headerlink" title="更优雅的处理方案"></a>更优雅的处理方案</h3><p>当然我们有更优雅的处理方案来解决：~/.ssh/config。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span> contents of $HOME/.ssh/config</span><br><span class="line">Host dev</span><br><span class="line">    HostName dev.example.com</span><br><span class="line">    Port 22000</span><br><span class="line">    User root</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> contents of <span class="variable">$HOME</span>/.ssh/config</span></span><br><span class="line">Host dev</span><br><span class="line">    HostName dev.example.com</span><br><span class="line">    Port 22000</span><br><span class="line">    User root</span><br></pre></td></tr></table></figure>
 <p>如果文件不存在，就新建这个文件吧。<br>这样，采用<code>$ ssh dev</code>就可以直接登录啦。<br>Done.</p>
 
       
