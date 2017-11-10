@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="Finn and The World">
 <meta property="og:description" content="可爱的小鲸鱼有没有。蓝色的有没有。蓝鲸大学有没有！什么鬼。很明显，这是一只鲸鱼，它托着许多集装箱。我们可以把宿主机可当做这只鲸鱼，把相互隔离的容器可看成集装箱，每个集装箱中都包含自己的应用程序。这 Logo 简直的太形象了！  Docker 容器相对于虚拟机而言，除了在技术实现上完全不一样以外，启动速度较虚拟机而言有本质的飞跃，启动一个容器只在眨眼瞬间。不管是虚拟机还是 Docker 容器，它们都">
 <meta property="og:image" content="http://vegetablefinn.github.io/img/2016-05-18-Docker-001.png">
-<meta property="og:updated_time" content="2016-05-18T08:09:55.000Z">
+<meta property="og:updated_time" content="2017-11-10T13:02:55.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="可爱的Docker">
 <meta name="twitter:description" content="可爱的小鲸鱼有没有。蓝色的有没有。蓝鲸大学有没有！什么鬼。很明显，这是一只鲸鱼，它托着许多集装箱。我们可以把宿主机可当做这只鲸鱼，把相互隔离的容器可看成集装箱，每个集装箱中都包含自己的应用程序。这 Logo 简直的太形象了！  Docker 容器相对于虚拟机而言，除了在技术实现上完全不一样以外，启动速度较虚拟机而言有本质的飞跃，启动一个容器只在眨眼瞬间。不管是虚拟机还是 Docker 容器，它们都">
@@ -213,6 +213,9 @@
 <li><p>启动镜像<br><code>docker run -d -p 10022:22 --name centos hefan/centos_sshd /usr/sbin/sshd -D</code><br>Done.<br><code>ssh root@localhost -p 10022</code></p>
 </li>
 </ol>
+<hr>
+<p>查找镜像<code>docker search centos</code><br>拉取镜像<code>docker pull centos</code><br>列表镜像<code>docker images</code><br>运行镜像<code>docker run -i -t centos bin/bash</code><br>保存镜像<code>docker commit e41ad7d40425 hefan/centos_sshd</code><br>展示容器<code>docker ps -l</code><br>展示容器<code>docker ps -a</code></p>
+<hr>
 
       
 
