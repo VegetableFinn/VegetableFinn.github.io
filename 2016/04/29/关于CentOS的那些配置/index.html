@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://vegetablefinn.github.io">
-  <title>Archives | Finn and The World</title>
+  <title>关于CentOS的那些配置 | Finn and The World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Finn and The World">
-<meta property="og:url" content="http://vegetablefinn.github.io/archives/index.html">
+  <meta name="description" content="CentOS 安装JDK笔记 CentOS 安装Mysql笔记 CentOS 安装Maven笔记">
+<meta name="keywords" content="技术,CentOS,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于CentOS的那些配置">
+<meta property="og:url" content="http://vegetablefinn.github.io/2016/04/29/关于CentOS的那些配置/index.html">
 <meta property="og:site_name" content="Finn and The World">
+<meta property="og:description" content="CentOS 安装JDK笔记 CentOS 安装Mysql笔记 CentOS 安装Maven笔记">
+<meta property="og:updated_time" content="2016-08-20T02:00:37.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Finn and The World">
+<meta name="twitter:title" content="关于CentOS的那些配置">
+<meta name="twitter:description" content="CentOS 安装JDK笔记 CentOS 安装Mysql笔记 CentOS 安装Maven笔记">
   
     <link rel="alternative" href="/atom.xml" title="Finn and The World" type="application/atom+xml">
   
@@ -153,36 +158,87 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-关于CentOS的那些配置" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/07/77666/" class="archive-article-date">
-  	<time datetime="2017-05-07T12:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/07/77666/">77666</a>
+    <h1 class="article-title" itemprop="name">
+      关于CentOS的那些配置
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2016/04/29/关于CentOS的那些配置/" class="archive-article-date">
+  	<time datetime="2016-04-29T14:08:48.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-04-29</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li>CentOS 安装JDK笔记</li>
+<li>CentOS 安装Mysql笔记</li>
+<li>CentOS 安装Maven笔记<a id="more"></a>
+<h1 id="CentOS-安装JDK笔记"><a href="#CentOS-安装JDK笔记" class="headerlink" title="CentOS 安装JDK笔记"></a>CentOS 安装JDK笔记</h1>系统环境：centos-6.5<br>安装方式：rpm安装<br>软件：jdk-7-linux-i586.rpm<br>下载地址：<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="external">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a><h3 id="检验系统原版本"><a href="#检验系统原版本" class="headerlink" title="检验系统原版本"></a>检验系统原版本</h3>先查看是否安装了OpenJDK版本，如果是，卸载掉，换成sun版本的。换的原因各家有各家的说法。。。。</li>
+</ol>
+<p>[root@localhost ~]# java -version<br>java version “1.7.0_24”<br>OpenJDK Runtime Environment (build 1.7.0_24-b18)<br>OpenJDK HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)</p>
+<p>进一步查看JDK信息：<br>```<br>[root@localhost ~]# rpm -qa | grep java<br>tzdata-java-2012c-1.el6.noarch<br>java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64<br>```<br>卸载OpenJDK，执行以下操作：<br>```<br>[root@localhost ~]# rpm -e –nodeps tzdata-java-2012c-1.el6.noarch<br>[root@localhost ~]# rpm -e –nodeps java-1.7.0-openjdk-1.7.0.45-1.45.1.11.1.el6.x86_64<br>```</p>
+<h3 id="安装JDK"><a href="#安装JDK" class="headerlink" title="安装JDK"></a>安装JDK</h3><p>上传新的jdk-7-linux-i586.rpm软件：<br>注意，如果是x64系统，需要使用jdk-7u79-linux-x64.rpm<br>下载地址：<a href="http://www.oracle.com/technetwork/cn/java/javase/downloads/jdk7-downloads-1880260.html" target="_blank" rel="external">http://www.oracle.com/technetwork/cn/java/javase/downloads/jdk7-downloads-1880260.html</a><br><code>[root@localhost ckb]# rpm -ivh jdk-7-linux-i586.rpm</code><br>JDK默认安装在/usr/java中。<br>验证安装<br>执行以下操作，查看信息是否正常：<br>```<br>[root@localhost bin]# java<br>[root@localhost bin]# javac<br>[root@localhost bin]# java -version<br>java version “1.7.0_45”<br>Java(TM) SE Runtime Environment (build 1.7.0_45-b18)<br>Java HotSpot(TM) Client VM (build 24.45-b08, mixed mode, sharing)<br>```</p>
+<h2 id="无需配置环境变量。"><a href="#无需配置环境变量。" class="headerlink" title="无需配置环境变量。"></a>无需配置环境变量。</h2><h1 id="CentOS-安装Mysql笔记"><a href="#CentOS-安装Mysql笔记" class="headerlink" title="CentOS 安装Mysql笔记"></a>CentOS 安装Mysql笔记</h1><p>Step 1<br>下载yum的repo rpm package。<br>如果是CentOS6：<code>wget http://repo.mysql.com/mysql-community-release-el6-5.noarch.rpm</code><br>如果是CentOS7:<code>wget http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</code></p>
+<p>Step 2:<br>安装。<br>CentOS 6 : <code>rpm -ivh mysql-community-release-el6-5.noarch.rpm</code><br>CentOS 7 : <code>rpm -ivh mysql-community-release-el7-5.noarch.rpm</code></p>
+<p>Step 3:<br>安装服务端。<br>CentOS 6 : <code>yum install -y mysql-server</code><br>CentOS 7 : <code>yum install -y mysql-community-server</code></p>
+<p>Step 4:<br>启动MySQL服务。<br>CentOS 6 : <code>/etc/init.d/mysqld start</code><br>CentOS 7 : <code>service mysqld restart</code></p>
+<p>Step 5:（只针对CentOS7）<br>开启3306端口的防火墙，用于外网访问数据库。<br>```<br>firewall-cmd –zone=public –add-port=3306/tcp –permanent<br>firewall-cmd –reload<br>```</p>
+<blockquote>
+<p>具体参考：<br><a href=""> http://sharadchhetri.com/2013/12/26/install-mysql-server-5-6-in-centos-6-x-and-red-hat-6-x-linux/ </a></p>
+</blockquote>
+<p>```<br>use mysql;<br>UPDATE user SET Password = PASSWORD(‘newpass’) WHERE user = ‘root’;<br>Grant all privileges on <em>.</em> to ‘root’@’%’ identified by ‘password’ with grant option;<br>select host, user from user;</p>
+<p>flush privileges;<br>```</p>
+<p>卸载方案：<br>```<br>yum remove  mysql mysql-server mysql-libs mysql-server;<br>find / -name mysql 将找到的相关东西delete掉；<br>rpm -qa|grep mysql(查询出来的东东yum remove掉)<br>```</p>
+<h1 id="CentOS-安装Maven笔记"><a href="#CentOS-安装Maven笔记" class="headerlink" title="CentOS 安装Maven笔记"></a>CentOS 安装Maven笔记</h1><ol>
+<li>首先从官网上 <a href="http://maven.apache.org/" target="_blank" rel="external">http://maven.apache.org/</a> 下载最新版Maven。我用的是apache-maven-3.0.4-bin.tar.gz。将下载后的文件拷贝到 /usr/local/目录下；</li>
+<li>执行 <code>tar -zxvf apache-maven-3.0.4-bin.tar.gz</code> 命令解压文件；</li>
+<li>解压后会生成apache-maven-3.0.4目录，删除apache-maven-3.0.4-bin.tar.gz压缩包文件</li>
+<li>执行 <code>ln -s apache-maven-3.0.4 apache-maven</code>（为Maven做一个软链接，方便以后升级）</li>
+<li><p>执行 <code>vi /etc/profile</code> 文件，插入如下内容<br>```<br>export M2_HOME=/usr/local/apache-maven<br>PATH=$PATH:$JAVA_HOME/bin:$M2_HOME/bin<br>export PATH<br>```</p>
+</li>
+<li><p>保存并退出VI编辑器，执行 <code>source /etc/profile</code> 命令使改动生效</p>
+</li>
+<li>执行 mvn -v 命令，如出现如下内容表示安装配置成功<br>```<br>[root@xg ]# mvn -v<br>Apache Maven 3.0.4 (r1232337; 2012-01-17 16:44:56+0800)<br>Maven home: /usr/local/apache-maven<br>Java version: 1.6.0_33, vendor: Sun Microsystems Inc.<br>Java home: /usr/local/jdk1.6.0_33/jre<br>Default locale: zh_CN, platform encoding: UTF-8<br>OS name: “linux”, version: “2.6.32-279.2.1.el6.x86_64”, arch: “amd64”, family: “unix”<br>```</li>
+</ol>
+<h1 id="修改时区"><a href="#修改时区" class="headerlink" title="修改时区"></a>修改时区</h1><p><code>timedatectl set-timezone Asia/Shanghai</code></p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -190,378 +246,126 @@
         		<li class="article-tag-list-item">
         			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
         		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">CentOS</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Linux</a>
+        		</li>
       		
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/18/春嬌與志明-2012/" class="archive-article-date">
-  	<time datetime="2016-06-18T06:15:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/18/春嬌與志明-2012/">春嬌與志明 (2012)</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">电影</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://vegetablefinn.github.io/2016/04/29/关于CentOS的那些配置/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/《从你的全世界路过》张佳嘉/" class="archive-article-date">
-  	<time datetime="2016-06-06T14:33:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-06</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2016/05/02/SS神器-FinalSpeed-XSocks-笔记/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          SS神器-FinalSpeed(XSocks)笔记
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/04/29/swift-IOS的那些资料/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">swift-IOS的那些资料</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/《从你的全世界路过》张佳嘉/">《从你的全世界路过》张佳嘉</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阅读</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/《嫌疑人x的献身》/" class="archive-article-date">
-  	<time datetime="2016-06-06T14:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/《嫌疑人x的献身》/">《嫌疑人x的献身》</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阅读</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/Rime-鼠须管输入法/" class="archive-article-date">
-  	<time datetime="2016-06-06T07:49:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/Rime-鼠须管输入法/">Rime 鼠须管输入法配置备份</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/27/136-Single-Number/" class="archive-article-date">
-  	<time datetime="2016-05-27T03:18:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/27/136-Single-Number/">136_Single_Number</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/25/344-Reverse-String/" class="archive-article-date">
-  	<time datetime="2016-05-25T12:10:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/25/344-Reverse-String/">344_Reverse_String</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/25/《成大事者不纠结》罗振宇/" class="archive-article-date">
-  	<time datetime="2016-05-25T06:34:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/25/《成大事者不纠结》罗振宇/">《成大事者不纠结》罗振宇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阅读</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/21/350-Intersection-of-Two-Arrays-II/" class="archive-article-date">
-  	<time datetime="2016-05-21T04:32:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/21/350-Intersection-of-Two-Arrays-II/">350_Intersection_of_Two_Arrays_II</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/19/超新约全书（2015）/" class="archive-article-date">
-  	<time datetime="2016-05-19T13:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/19/超新约全书（2015）/">超新约全书（2015）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">电影</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -585,8 +389,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

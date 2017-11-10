@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://vegetablefinn.github.io">
-  <title>Archives | Finn and The World</title>
+  <title>SSH免密登录-使用public_key登录 | Finn and The World</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Finn and The World">
-<meta property="og:url" content="http://vegetablefinn.github.io/archives/index.html">
+  <meta name="description" content="Step 1，检查本机是否已经存在SSH Keys打开终端，输入ls -al ~/.ssh查看本机是否已经存在SSH Key。-rw-------   1 root  staff   1679  3  4 13:51 id_rsa -rw-r--r--   1 root  staff    406  3  4 13:51 id_rsa.pub若存在上述两个文件，说明本机已经有SSH Key，直接进">
+<meta name="keywords" content="技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SSH免密登录-使用public_key登录">
+<meta property="og:url" content="http://vegetablefinn.github.io/2016/05/07/SSH免密登录-使用public-key登录/index.html">
 <meta property="og:site_name" content="Finn and The World">
+<meta property="og:description" content="Step 1，检查本机是否已经存在SSH Keys打开终端，输入ls -al ~/.ssh查看本机是否已经存在SSH Key。-rw-------   1 root  staff   1679  3  4 13:51 id_rsa -rw-r--r--   1 root  staff    406  3  4 13:51 id_rsa.pub若存在上述两个文件，说明本机已经有SSH Key，直接进">
+<meta property="og:updated_time" content="2016-05-07T12:33:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Finn and The World">
+<meta name="twitter:title" content="SSH免密登录-使用public_key登录">
+<meta name="twitter:description" content="Step 1，检查本机是否已经存在SSH Keys打开终端，输入ls -al ~/.ssh查看本机是否已经存在SSH Key。-rw-------   1 root  staff   1679  3  4 13:51 id_rsa -rw-r--r--   1 root  staff    406  3  4 13:51 id_rsa.pub若存在上述两个文件，说明本机已经有SSH Key，直接进">
   
     <link rel="alternative" href="/atom.xml" title="Finn and The World" type="application/atom+xml">
   
@@ -153,36 +158,63 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-SSH免密登录-使用public-key登录" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/07/77666/" class="archive-article-date">
-  	<time datetime="2017-05-07T12:35:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-07</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/07/77666/">77666</a>
+    <h1 class="article-title" itemprop="name">
+      SSH免密登录-使用public_key登录
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2016/05/07/SSH免密登录-使用public-key登录/" class="archive-article-date">
+  	<time datetime="2016-05-07T12:13:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="Step-1，检查本机是否已经存在SSH-Keys"><a href="#Step-1，检查本机是否已经存在SSH-Keys" class="headerlink" title="Step 1，检查本机是否已经存在SSH Keys"></a>Step 1，检查本机是否已经存在SSH Keys</h3><p>打开终端，输入<code>ls -al ~/.ssh</code>查看本机是否已经存在SSH Key。<br><code>-rw-------   1 root  staff   1679  3  4 13:51 id_rsa
+-rw-r--r--   1 root  staff    406  3  4 13:51 id_rsa.pub</code><br>若存在上述两个文件，说明本机已经有SSH Key，直接进入Step 3.<br>一般Key的文件命名为：<br><code>id_dsa.pub
+id_ecdsa.pub
+id_ed25519.pub
+id_rsa.pub</code><br><a id="more"></a></p>
+<h3 id="Step-2-生成新的Key（若本机已经有，则不用再生成）"><a href="#Step-2-生成新的Key（若本机已经有，则不用再生成）" class="headerlink" title="Step 2, 生成新的Key（若本机已经有，则不用再生成）"></a>Step 2, 生成新的Key（若本机已经有，则不用再生成）</h3><p>打开终端，输入<code>ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</code>，其中的email地址改为你的Github的邮箱地址。<br>当提示保存key的路径地址时，直接回车，使用默认地址。<br><code>Enter a file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]</code><br>其中，若提示passphrase，可以跳过。<br>紧接着，将Key加入到ssh-agent中。<br><code>eval &quot;$(ssh-agent -s)&quot;
+Agent pid 59566</code><br><code>$ ssh-add ~/.ssh/id_rsa</code></p>
+<h3 id="Step-3-将Key导入服务器上"><a href="#Step-3-将Key导入服务器上" class="headerlink" title="Step 3,将Key导入服务器上"></a>Step 3,将Key导入服务器上</h3><p>在本机的/home/yourname/.ssh目录下，执行：<br><code>cat id_rsa.pub &gt; authorized_keys</code><br>然后执行<br><code>scp /home/yourname/.ssh/authorized_keys yourname@192.168.1.1:/root/.ssh/</code><br>即可完成。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -194,374 +226,114 @@
 		</ul>
 	</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
       
-        </div></section>
+
       
+
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/18/春嬌與志明-2012/" class="archive-article-date">
-  	<time datetime="2016-06-18T06:15:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/18/春嬌與志明-2012/">春嬌與志明 (2012)</a>
-    </h1>
-  
+      </div>
+    </span>
+  </div>
+</div>
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">电影</a>
-        		</li>
-      		
-		</ul>
-	</div>
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://vegetablefinn.github.io/2016/05/07/SSH免密登录-使用public-key登录/" alt="微信分享二维码">
+    </div>
+</div>
 
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/《从你的全世界路过》张佳嘉/" class="archive-article-date">
-  	<time datetime="2016-06-06T14:33:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-06</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2016/05/07/VPS上的SSH优化——Oh-My-Zsh美化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          VPS上的SSH优化——Oh My Zsh美化
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/06/心迷宫-2014/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">心迷宫(2014)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/《从你的全世界路过》张佳嘉/">《从你的全世界路过》张佳嘉</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阅读</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/《嫌疑人x的献身》/" class="archive-article-date">
-  	<time datetime="2016-06-06T14:31:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/《嫌疑人x的献身》/">《嫌疑人x的献身》</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阅读</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/06/06/Rime-鼠须管输入法/" class="archive-article-date">
-  	<time datetime="2016-06-06T07:49:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-06-06</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/06/06/Rime-鼠须管输入法/">Rime 鼠须管输入法配置备份</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">技术</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/27/136-Single-Number/" class="archive-article-date">
-  	<time datetime="2016-05-27T03:18:07.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-27</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/27/136-Single-Number/">136_Single_Number</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/25/344-Reverse-String/" class="archive-article-date">
-  	<time datetime="2016-05-25T12:10:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/25/344-Reverse-String/">344_Reverse_String</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/25/《成大事者不纠结》罗振宇/" class="archive-article-date">
-  	<time datetime="2016-05-25T06:34:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-25</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/25/《成大事者不纠结》罗振宇/">《成大事者不纠结》罗振宇</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">阅读</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/21/350-Intersection-of-Two-Arrays-II/" class="archive-article-date">
-  	<time datetime="2016-05-21T04:32:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/21/350-Intersection-of-Two-Arrays-II/">350_Intersection_of_Two_Arrays_II</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/19/超新约全书（2015）/" class="archive-article-date">
-  	<time datetime="2016-05-19T13:22:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/19/超新约全书（2015）/">超新约全书（2015）</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">电影</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/archives/page/2/">2</a><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/2/">Next &raquo;</a>
-    </nav>
   
 
 
@@ -585,8 +357,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
